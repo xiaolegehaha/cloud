@@ -1,7 +1,8 @@
 package com.geostar.cloud.auth.authentication.rest;
 
-import com.springboot.cloud.auth.authentication.service.IAuthenticationService;
-import com.springboot.cloud.common.core.entity.vo.Result;
+import com.geostar.cloud.auth.authentication.service.IAuthenticationService;
+import com.geostar.cloud.common.core.vo.Result;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

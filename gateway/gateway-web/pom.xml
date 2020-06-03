@@ -13,4 +13,29 @@
 	<name>gateway-web</name>
 	<description>Demo project for Spring Boot</description>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
+		</dependency>
+		<!--redis限流-->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis-reactive -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+			<version>2.3.0.RELEASE</version>
+		</dependency>
+		<!--网关签权客户端-->
+		<dependency>
+			<groupId>com.geostar.cloud.auth.client</groupId>
+			<artifactId>authentication-client</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+	</dependencies>
+
 </project>

@@ -1,9 +1,7 @@
 package com.geostar.cloud.sysadmin.organization.service.impl;
 
-import com.alicp.jetcache.anno.CacheInvalidate;
-import com.alicp.jetcache.anno.CacheType;
-import com.alicp.jetcache.anno.CacheUpdate;
-import com.alicp.jetcache.anno.Cached;
+import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.anno.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.geostar.cloud.sysadmin.organization.dao.GroupMapper;
@@ -11,8 +9,11 @@ import com.geostar.cloud.sysadmin.organization.entity.param.GroupQueryParam;
 import com.geostar.cloud.sysadmin.organization.entity.po.Group;
 import com.geostar.cloud.sysadmin.organization.service.IGroupService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
@@ -53,4 +54,5 @@ public class GroupService extends ServiceImpl<GroupMapper, Group> implements IGr
     public List<Group> queryByParentId(String id) {
         return this.list(new QueryWrapper<Group>().eq("parent_id", id));
     }
+
 }

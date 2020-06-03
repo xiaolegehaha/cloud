@@ -21,8 +21,12 @@ public class NewMvcRequestMatcher extends MvcRequestMatcher {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         NewMvcRequestMatcher that = (NewMvcRequestMatcher) o;
         return Objects.equal(pattern, that.pattern) &&
                 Objects.equal(method, that.method);

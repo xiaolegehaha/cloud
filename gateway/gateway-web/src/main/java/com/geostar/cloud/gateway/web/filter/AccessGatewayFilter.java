@@ -2,8 +2,8 @@ package com.geostar.cloud.gateway.web.filter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.geostar.cloud.auth.authentication.service.IAuthService;
-import com.geostar.cloud.gateway.service.IPermissionService;
+import com.geostar.cloud.auth.client.service.IAuthService;
+import com.geostar.cloud.gateway.web.service.IPermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
