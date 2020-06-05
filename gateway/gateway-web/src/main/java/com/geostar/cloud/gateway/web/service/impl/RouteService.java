@@ -8,17 +8,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteDefinition;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.*;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,10 +33,28 @@ public class RouteService implements IRouteService {
 
     private Map<String, RouteDefinition> routeDefinitionMaps = new HashMap<>();
 
-    @PostConstruct
-    private void loadRouteDefinition() {
+    public void loadRouteDefinition() {
         log.info("loadRouteDefinition, 开始初使化路由");
-        Set<String> gatewayKeys = stringRedisTemplate.keys(GATEWAY_ROUTES + "*");
+        Set<String> gatewayKeys = new HashSet<>();
+        long start = System.currentTimeMillis();
+        //需要匹配的key
+        String patternKey = GATEWAY_ROUTES + "*";
+        ScanOptions options = ScanOptions.scanOptions()
+                //这里指定每次扫描key的数量
+                .count(10000)
+                .match(patternKey).build();
+        RedisSerializer<String> redisSerializer = (RedisSerializer<String>) stringRedisTemplate.getKeySerializer();
+        Cursor cursor = (Cursor) stringRedisTemplate.executeWithStickyConnection(redisConnection -> new ConvertingCursor<>(redisConnection.scan(options), redisSerializer::deserialize));
+        while(cursor.hasNext()){
+            gatewayKeys.add(cursor.next().toString());
+        }
+        //切记这里一定要关闭，否则会耗尽连接数。报Cannot get Jedis connection; nested exception is redis.clients.jedis.exceptions.JedisException: Could not get a
+        try {
+            cursor.close();
+        }catch (IOException e){
+            log.error("网关scan扫描异常：", e);
+        }
+        log.info("scan扫描共耗时：{} ms key数量：{}",System.currentTimeMillis()-start,gatewayKeys.size());
         if (CollectionUtils.isEmpty(gatewayKeys)) {
             return;
         }

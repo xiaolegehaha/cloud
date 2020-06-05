@@ -33,6 +33,9 @@ import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 认证服务配置
+ */
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {

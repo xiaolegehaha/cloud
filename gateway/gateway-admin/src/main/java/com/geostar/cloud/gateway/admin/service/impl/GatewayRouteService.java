@@ -22,12 +22,9 @@ import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.URI;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -107,7 +104,6 @@ public class GatewayRouteService extends ServiceImpl<GatewayRouteMapper, Gateway
     }
 
     @Override
-    @PostConstruct
     public boolean overload() {
         List<GatewayRoute> gatewayRoutes = this.list(new QueryWrapper<>());
         gatewayRoutes.forEach(gatewayRoute ->
