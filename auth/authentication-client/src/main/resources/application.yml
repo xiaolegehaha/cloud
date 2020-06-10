@@ -9,3 +9,8 @@ gate:
       startWith: /oauth,/open
 server:
   port: 8003
+feign:
+  sentinel:
+    enabled: true
+  okhttp:
+    enabled: true

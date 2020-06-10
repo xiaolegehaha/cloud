@@ -1,6 +1,7 @@
 package com.geostar.cloud.auth.client.config;
 
 import feign.Feign;
+import okhttp3.ConnectionPool;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
@@ -29,7 +30,7 @@ public class FeignOkHttpConfig {
 				.readTimeout(feignOkHttpReadTimeout, TimeUnit.SECONDS)
 				.connectTimeout(feignConnectTimeout, TimeUnit.SECONDS)
 				.writeTimeout(feignWriteTimeout, TimeUnit.SECONDS)
-//				.connectionPool(new ConnectionPool(int maxIdleConnections, long keepAliveDuration, TimeUnit timeUnit))   //自定义链接池
+				.connectionPool(new ConnectionPool(5, 5L, TimeUnit.MINUTES))   //自定义链接池
 //				.addInterceptor(XXXXXXXInterceptor) 	//自定义拦截器
 				.build();
 	}

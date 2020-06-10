@@ -47,6 +47,8 @@ feign:
     enabled: true
   okhttp:
     enabled: true
+  httpclient:
+    enabled: false
 
 management:
   endpoints:

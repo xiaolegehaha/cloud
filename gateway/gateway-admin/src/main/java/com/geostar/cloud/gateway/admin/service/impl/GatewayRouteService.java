@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.FilterDefinition;
 import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinition;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Order(1)
 @Slf4j
 public class GatewayRouteService extends ServiceImpl<GatewayRouteMapper, GatewayRoute> implements IGatewayRouteService {
 

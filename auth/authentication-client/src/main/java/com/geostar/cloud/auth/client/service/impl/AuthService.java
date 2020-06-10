@@ -38,6 +38,7 @@ public class AuthService implements IAuthService {
 
     @Override
     public Result authenticate(String authentication, String url, String method) {
+        Result r = authProvider.auth(authentication, url, method);
         return authProvider.auth(authentication, url, method);
     }
 

@@ -29,6 +29,7 @@
 			<groupId>com.alicp.jetcache</groupId>
 			<artifactId>jetcache-starter-redis</artifactId>
 		</dependency>
+
 	</dependencies>
 
 </project>

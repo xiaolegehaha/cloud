@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Set;
 
-@FeignClient(name = "organization", fallback = OrganizationProviderFallback.class)
+@FeignClient(name = "organization", fallbackFactory = OrganizationFallbackFactory.class)//这种方式可以捕获异常
+//@FeignClient(name = "organization", fallback = OrganizationProviderFallback.class)
 @Primary
 public interface OrganizationProvider {
 

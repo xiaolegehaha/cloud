@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Component
 @Primary
-@FeignClient(name = "authentication-server", fallback = AuthProvider.AuthProviderFallback.class)
+@FeignClient(name = "authentication-server", fallbackFactory = AuthFallbackFactory.class)
 public interface AuthProvider {
     /**
      * 调用签权服务，判断用户是否有权限
@@ -31,25 +31,25 @@ public interface AuthProvider {
     @PostMapping(value = "/auth/permission")
     Result auth(@RequestHeader(HttpHeaders.AUTHORIZATION) String authentication, @RequestParam("url") String url, @RequestParam("method") String method);
 
-    @Component
-    class AuthProviderFallback implements AuthProvider {
-        /**
-         * 降级统一返回无权限
-         *
-         * @param authentication
-         * @param url
-         * @param method
-         * @return <pre>
-         * Result:
-         * {
-         *   code:"-1"
-         *   mesg:"系统异常"
-         * }
-         * </pre>
-         */
-        @Override
-        public Result auth(String authentication, String url, String method) {
-            return Result.fail();
-        }
-    }
+//    @Component
+//    class AuthProviderFallback implements AuthProvider {
+//        /**
+//         * 降级统一返回无权限
+//         *
+//         * @param authentication
+//         * @param url
+//         * @param method
+//         * @return <pre>
+//         * Result:
+//         * {
+//         *   code:"-1"
+//         *   mesg:"系统异常"
+//         * }
+//         * </pre>
+//         */
+//        @Override
+//        public Result auth(String authentication, String url, String method) {
+//            return Result.fail();
+//        }
+//    }
 }
