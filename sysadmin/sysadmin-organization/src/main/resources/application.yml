@@ -80,8 +80,8 @@ jetcache:
       type: redis
       expireAfterWriteInMillis: 7200000
       keyConvertor: fastjson
-      valueEncoder: kryo
-      valueDecoder: kryo
+      valueEncoder: java
+      valueDecoder: java
       poolConfig:
         minIdle: 5
         maxIdle: 20

@@ -12,6 +12,9 @@ import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 配置SwaggerProvider，获取Api-doc，即SwaggerResources。
+ */
 @Component
 @Primary
 @AllArgsConstructor

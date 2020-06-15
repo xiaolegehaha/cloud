@@ -11,6 +11,9 @@ import springfox.documentation.swagger.web.*;
 
 import java.util.Optional;
 
+/**
+ * 因为Swagger暂不支持webflux项目，所以Gateway里不能配置SwaggerConfig，而运行Swagger-ui又需要依赖一些接口，所以需要自己建立相应的swagger-resource端点。
+ */
 @RestController
 @RequestMapping("/swagger-resources")
 public class SwaggerHandler {
